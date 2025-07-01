@@ -3,6 +3,9 @@ import { slidesData } from './data/data.jsx';
 import Slide from './components/Slide';
 import Navigation from './components/Navigation';
 import ImageModal from './components/ImageModal';
+import PhoneFrame from './components/PhoneFrame';
+import Navbar from './components/Navbar';
+import './styles/styles.css';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -42,34 +45,38 @@ function App() {
   // Add a wrapper div to identify gallery images
   const slides = slidesData.map((slide, index) => {
     if (slide.title === 'App Screenshots') {
-        const originalContent = slide.content;
-        slide.content = <div className="gallery-item-container">{originalContent}</div>;
+      const imageSources = ["1st.jpg", "2nd.jpg", "3rd.jpg", "4th.jpg"];
+      slide.content = (
+        <div className="flex flex-wrap justify-center gap-4">
+          {imageSources.map((imgSrc, i) => (
+            <PhoneFrame key={i} imageSrc={`/images/${imgSrc}`} className="w-[200px] h-[450px]" />
+          ))}
+        </div>
+      );
     }
     return <Slide key={index} data={slide} isActive={index === currentSlide} />;
   });
 
   return (
-    <div className="font-sans bg-gray-100 text-gray-800 min-h-screen flex flex-col">
-      <header className="bg-blue-700 text-white py-6 px-4 text-center shadow-md">
-        <h1 className="text-3xl md:text-4xl font-bold">Duolingo Usability Analysis</h1>
-        <p className="text-md md:text-lg mt-1">A Visual Aid for App Evaluation</p>
-      </header>
-      
-      <main className="flex-grow flex items-center justify-center p-4">
-        {slides[currentSlide]}
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow flex items-center justify-center p-8">
+        <div className="container">
+          {slides[currentSlide]}
+        </div>
       </main>
 
-      <div className="py-4">
+      <div className="py-8">
         <Navigation 
           current={currentSlide} 
           total={slidesData.length} 
           onPrev={goToPrevSlide} 
           onNext={goToNextSlide} 
+          className="flex justify-center gap-4"
         />
       </div>
 
-      <footer className="text-center p-4 text-sm text-gray-500">
-        <p>Analysis by VJ</p>
+      <footer className="text-center py-4 text-sm text-gray-500">
       </footer>
 
       <ImageModal src={modalImage} onClose={() => setModalImage(null)} />

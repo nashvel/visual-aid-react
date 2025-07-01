@@ -1,24 +1,48 @@
 import React from 'react';
 
-const Navigation = ({ current, total, onPrev, onNext }) => {
+const Navigation = ({ current, total, onPrev, onNext, className = '' }) => {
   return (
-    <div className="flex items-center justify-center mt-8">
+    <div className={`flex items-center justify-center gap-4 ${className}`}>
       <button 
         onClick={onPrev} 
         disabled={current === 0}
-        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        className={`
+          neomorph-button
+          px-4 py-2
+          font-semibold
+          text-gray-800
+          disabled:opacity-50
+          disabled:cursor-not-allowed
+          transition-all
+          flex items-center gap-2
+        `}
       >
-        &#8592; Previous
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Previous
       </button>
-      <span className="mx-6 text-lg font-semibold text-gray-700">
+      <span className="text-gray-700 font-medium">
         Page {current + 1} of {total}
       </span>
       <button 
         onClick={onNext} 
         disabled={current === total - 1}
-        className="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        className={`
+          neomorph-button
+          px-4 py-2
+          font-semibold
+          text-gray-800
+          disabled:opacity-50
+          disabled:cursor-not-allowed
+          transition-all
+          flex items-center gap-2
+        `}
       >
-        Next &#8594;
+        Next
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+        </svg>
       </button>
     </div>
   );

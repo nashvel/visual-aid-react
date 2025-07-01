@@ -1,12 +1,13 @@
+import React from 'react';
+import GifEmbed from '../components/GifEmbed';
+import PhoneFrame from '../components/PhoneFrame';
+import FirstSlide from '../components/FirstSlide';
+
 export const slidesData = [
   {
     title: 'App Chosen: Duolingo',
     icon: 'fas fa-mobile-alt',
-    content: (
-      <p>
-        A free language-learning app that teaches users various languages through gamified lessons. It is used by students, travelers, professionals, and anyone who wants to learn or practice a language like Spanish, French, Japanese, and many more. It uses a level-based system with short quizzes, pronunciation tasks, and listening activities.
-      </p>
-    ),
+    content: <FirstSlide />,
   },
   {
     title: 'Evaluation Methods Used',
